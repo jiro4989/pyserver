@@ -14,30 +14,27 @@ $(function() {
       });
       let re = new RegExp(txt, 'i');
 
-      $('table').each(function() {
-        let table = $(this);
+      let table = $("#searchTarget");
+      let len = 4;
+      table.children('tbody').children('tr').each(function() {
+        // thead要素の回数分ループする
+        // 一度でもマッチしたらその後の要素を調べる必要が無いので、
+        // 早々にbreakして次のループへ
 
-        table.children('tbody').children('tr').each(function() {
-          // thead要素の回数分ループする
-          // 一度でもマッチしたらその後の要素を調べる必要が無いので、
-          // 早々にbreakして次のループへ
-          let len = $(this).children().length;
+        for (let i=0; i<len; i++) {
+          let txt = $(this).find("td:eq(" + i + ")").html();
+          // リンク要素もあるので、その場合を除外
+          txt = $('<a>').html(txt).text();
 
-          for (let i=0; i<len; i++) {
-            let txt = $(this).find("td:eq(" + i + ")").html();
-            // リンク要素もあるので、その場合を除外
-            txt = $('<a>').html(txt).text();
-
-            if(txt != null && txt.match(re)){
-              // マッチした行のみを表示
-              $(this).show();
-              break;
-            } else {
-              // マッチしなかったら非表示
-              $(this).hide();
-            }
+          if(txt != null && txt.match(re)){
+            // マッチした行のみを表示
+            $(this).show();
+            break;
+          } else {
+            // マッチしなかったら非表示
+            $(this).hide();
           }
-        });
+        }
       });
     } catch (ignore) { }
   });

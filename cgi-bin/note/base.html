@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>情報共有</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="shortcut icon" href="/img/icon_python.png">
+    <script src="/script/common/util/timer.js"></script>
+    <script src="/script/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/script/jquery/incremental_search.js"></script>
+
+    <style>
+body {
+  height: 100%;
+}
+header { height: 20%; }
+.note-form { height: 30%; }
+
+.note-space {
+  border: 1px solid #bbb;
+  height: 440px;
+  overflow-y: auto;
+}
+    </style>
+
+  </head>
+  <body>
+    <header>
+      <h1>共有したい情報を記録してください。</h1>
+      <span id="timer" style="font-size: 20px;"></span>
+      <a href="/index.html">トップページ</a>
+      <hr>
+    </header>
+
+    <div>
+      <section class="note-form">
+        <h2>メモ記入欄</h2>
+        <form method="post">
+          <div>
+            <label>発言者 : 
+              <select name="talker" autofocus>
+                <option value="田中:たなかtanaka">田中</option>
+                <option value="山田:やまだyamada">山田</option>
+                <option value="鈴木:すずきsuzuki">鈴木</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <textarea id="area" name="note" cols="175" rows="10" placeholder="(I) メモをここに記入..." accesskey="i"></textarea>
+          </div>
+          <input type="submit">
+        </form>
+      </section>
+
+      <hr>
+
+      <h2>メモ表示欄</h2>
+      <input type="search" id="searchInput" placeholder="(S) 検索..." accesskey="s" list="list" >
+      <datalist id="list">
+        <option value="田中"/>
+        <option value="山田"/>
+        <option value="鈴木"/>
+      </datalist>
+
+      <section class="note-space">
+        <table id="searchTarget" border="1">
+          <thead style="background-color: yellow; font-weight: bold;">
+            <tr>
+              <td>記録時間</td>
+              <td>発言者</td>
+              <td>メモ</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{ NOTES }}
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>
