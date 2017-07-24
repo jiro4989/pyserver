@@ -1,0 +1,5 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+
+sudo python -m http.server --cgi 80
+
